@@ -25,9 +25,6 @@ import scala.util.DynamicVariable
 import org.apache.spark._
 import org.apache.spark.util.collection.CompactBuffer
 
-/**
- * Extra functions available on RDDs of (key, value) pairs through an implicit conversion.
- */
 class PairRDDFunctions[K, V](self: RDD[(K, V)])
                             (implicit kt: ClassTag[K], vt: ClassTag[V], ord: Ordering[K] = null)
   extends Logging
@@ -180,7 +177,7 @@ class PairRDDFunctions[K, V](self: RDD[(K, V)])
   def cogroup[W1](other1: RDD[(K, W1)])
   : RDD[(K, (Iterable[V], Iterable[W1]))] = self.withScope {
     val cg = new CoGroupedRDD[K](Seq(self, other1))
-    cg.mapValues { case Seq(vs, w1s, w2s, w3s) =>
+    cg.mapValues { case Seq(vs, w1s) =>
       (vs.asInstanceOf[Iterable[V]],
         w1s.asInstanceOf[Iterable[W1]])
     }
@@ -190,7 +187,7 @@ class PairRDDFunctions[K, V](self: RDD[(K, V)])
                           other2: RDD[(K, W2)])
   : RDD[(K, (Iterable[V], Iterable[W1], Iterable[W2]))] = self.withScope {
     val cg = new CoGroupedRDD[K](Seq(self, other1, other2))
-    cg.mapValues { case Seq(vs, w1s, w2s, w3s) =>
+    cg.mapValues { case Seq(vs, w1s, w2s) =>
       (vs.asInstanceOf[Iterable[V]],
         w1s.asInstanceOf[Iterable[W1]],
         w2s.asInstanceOf[Iterable[W2]])

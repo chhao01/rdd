@@ -25,7 +25,7 @@ import scala.reflect.ClassTag
 
 import org.apache.spark.util.collection.CompactBuffer
 
-class CoGroupedRDD[K: ClassTag](
+private[spark] class CoGroupedRDD[K: ClassTag](
     @transient var rdds: Seq[RDD[_ <: Product2[K, _]]])
   extends RDD[(K, Seq[Iterable[_]])](rdds.head.context) {
 

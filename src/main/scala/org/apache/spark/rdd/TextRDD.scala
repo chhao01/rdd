@@ -23,7 +23,7 @@ import org.apache.spark._
 import org.apache.spark.util.NextIterator
 
 
-class TextRDD(
+private[spark] class TextRDD(
     sc: SparkContext,
     filepath: String)
   extends RDD[String](sc) with Logging {

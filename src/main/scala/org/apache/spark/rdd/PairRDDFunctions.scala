@@ -18,14 +18,13 @@
 package org.apache.spark.rdd
 
 import scala.collection.Map
-import scala.collection.mutable.ArrayBuffer
 import scala.reflect.ClassTag
 import scala.util.DynamicVariable
 
 import org.apache.spark._
 import org.apache.spark.util.collection.CompactBuffer
 
-class PairRDDFunctions[K, V](self: RDD[(K, V)])
+private[spark] class PairRDDFunctions[K, V](self: RDD[(K, V)])
                             (implicit kt: ClassTag[K], vt: ClassTag[V], ord: Ordering[K] = null)
   extends Logging
   with Serializable

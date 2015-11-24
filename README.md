@@ -17,11 +17,13 @@ object Example {
 
 这个工程基于Apache LICENSE-2.0 协议，可以自由传播，重在学习Scala编程，从零实现Spark代码。
 
-欢迎提交Pull Request，完善代码注释以及多线程执行。
+欢迎提交Pull Request，完善代码注释，单元测试以及多线程执行支持。
 
 联系人：Cheng Hao
 
 email:chhao01@gmail.com
+
 qq:16426021
+
 qq群:240348813
 

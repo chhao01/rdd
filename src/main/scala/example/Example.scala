@@ -24,6 +24,7 @@ object Example {
   def main(args: Array[String]) {
     val sc = SparkContext("local[4]", "test")
     println(sc.makeRDD(1 to 100).filter(_ % 2 == 1).count())
+
     sc.parallelize(1 to 30).groupBy(_ % 5).map { case (k, it) =>
       s"k => sum: ${it.sum}"
     }.foreach(println)

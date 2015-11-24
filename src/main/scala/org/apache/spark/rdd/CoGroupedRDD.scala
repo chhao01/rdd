@@ -30,13 +30,12 @@ class CoGroupedRDD[K: ClassTag](
   extends RDD[(K, Seq[Iterable[_]])](rdds.head.context) {
 
   private type CoGroup = CompactBuffer[Any]
-  private type CoGroupValue = (Any, Int)  // Int is dependency number
+  private type CoGroupValue = (Any, Int)  // Int is the idx of the rdd in the cogroup
   private type CoGroupCombiner = Seq[CoGroup]
 
   override def compute(): Iterator[(K, Seq[Iterable[_]])] = {
     val numRdds = rdds.length
 
-    // A list of (rdd iterator, dependency number) pairs
     val rddIterators = new ArrayBuffer[(Iterator[Product2[K, Any]], Int)]
     for ((rdd, depNum) <- rdds.zipWithIndex) {
       rddIterators += ((rdd.compute(), depNum))

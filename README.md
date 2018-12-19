@@ -21,9 +21,5 @@ object Example {
 
 联系人：Cheng Hao
 
-email:chhao01@gmail.com
-
-qq:16426021
-
-qq群:240348813
+qq群:455865057
 
